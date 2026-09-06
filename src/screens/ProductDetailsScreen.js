@@ -5,6 +5,7 @@ import ProductPrice from '../components/ProductPrice';
 import RequestState from '../components/RequestState';
 import { getProductById } from '../services/products';
 import { colors, fonts } from '../components/theme';
+import { getProductText } from '../localization/productText';
 
 export default function ProductDetailsScreen({ route, navigation }) {
   const { productId } = route.params;
@@ -12,6 +13,7 @@ export default function ProductDetailsScreen({ route, navigation }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [attempt, setAttempt] = useState(0);
+  const { title, description } = getProductText(product);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -35,10 +37,10 @@ export default function ProductDetailsScreen({ route, navigation }) {
       {loading || error ? <RequestState loading={loading} error={error} onRetry={() => setAttempt((value) => value + 1)} /> : product ? (
         <ScrollView contentContainerStyle={styles.content}>
           <View style={styles.imageContainer}>
-            <Image source={{ uri: product.images?.[0] || product.thumbnail }} style={styles.image} resizeMode="contain" accessibilityLabel={product.title} />
+            <Image source={{ uri: product.images?.[0] || product.thumbnail }} style={styles.image} resizeMode="contain" accessibilityLabel={title} />
           </View>
-          <Text style={styles.title}>{product.title}</Text>
-          <Text style={styles.description}>{product.description}</Text>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.description}>{description}</Text>
           <ProductPrice price={product.price} discountPercentage={product.discountPercentage} detailed />
         </ScrollView>
       ) : null}

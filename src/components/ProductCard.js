@@ -1,13 +1,15 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import ProductPrice from './ProductPrice';
 import { colors, fonts } from './theme';
+import { getProductText } from '../localization/productText';
 
 export default function ProductCard({ product, onPress }) {
+  const { title } = getProductText(product);
   return (
-    <Pressable accessibilityRole="button" accessibilityLabel={`Ver detalhes de ${product.title}`} onPress={onPress} style={styles.card}>
-      <Image source={{ uri: product.thumbnail }} style={styles.image} resizeMode="contain" accessibilityLabel={product.title} />
+    <Pressable accessibilityRole="button" accessibilityLabel={`Ver detalhes de ${title}`} onPress={onPress} style={styles.card}>
+      <Image source={{ uri: product.thumbnail }} style={styles.image} resizeMode="contain" accessibilityLabel={title} />
       <View style={styles.content}>
-        <Text style={styles.title}>{product.title}</Text>
+        <Text style={styles.title}>{title}</Text>
         <ProductPrice price={product.price} discountPercentage={product.discountPercentage} />
       </View>
     </Pressable>
