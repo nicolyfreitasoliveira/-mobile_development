@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { FlatList, Text } from 'react-native';
+import { FlatList, StyleSheet, Text } from 'react-native';
 import Screen from '../components/Screen';
 import ProductCard from '../components/ProductCard';
 import RequestState from '../components/RequestState';
 import { getProductsByGroup } from '../services/products';
+import { colors, fonts } from '../components/theme';
 
 export default function ProductsScreen({ route, navigation }) {
   const { group } = route.params;
@@ -24,12 +25,19 @@ export default function ProductsScreen({ route, navigation }) {
   }, [group, attempt]);
 
   return (
-    <Screen>
+    <Screen edges={['left', 'right']}>
       {loading || error ? <RequestState loading={loading} error={error} onRetry={() => setAttempt((value) => value + 1)} /> : (
         <FlatList data={products} keyExtractor={(item) => String(item.id)}
+          contentContainerStyle={styles.list}
+          ListHeaderComponent={<Text accessibilityRole="header" style={styles.title}>{group === 'masculino' ? 'Produtos masculinos' : 'Produtos femininos'}</Text>}
           ListEmptyComponent={<Text>Nenhum produto encontrado.</Text>}
           renderItem={({ item }) => <ProductCard product={item} onPress={() => navigation.navigate('ProductDetails', { productId: item.id })} />} />
       )}
     </Screen>
   );
 }
+
+const styles = StyleSheet.create({
+  list: { paddingTop: 38, paddingBottom: 24 },
+  title: { fontFamily: fonts.medium, fontSize: 22, lineHeight: 27, color: colors.text, marginBottom: 28 },
+});

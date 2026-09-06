@@ -61,7 +61,8 @@ A correção com `--force` sugere versões antigas incompatíveis e não foi apl
    Apenas o nome do usuário fica no Redux; a senha não é armazenada nem enviada.
 3. Consulte as abas Masculino e Feminino. Elas carregam todas as categorias abaixo.
 4. Toque em um produto para buscar `/products/{id}` e visualizar nome, imagem,
-   descrição, preço (exibido em US$, sem conversão) e desconto percentual da API.
+   descrição, preço (formato `R$ 229,99`, preservando o valor da API sem conversão)
+   e desconto percentual da API.
 5. Use **Sair** na lista ou nos detalhes. O Redux é limpo e o login volta a ser
    a única tela disponível. Reiniciar o aplicativo também encerra a sessão.
 

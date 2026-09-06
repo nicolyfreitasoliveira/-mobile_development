@@ -1,5 +1,6 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import ProductPrice from './ProductPrice';
+import { colors, fonts } from './theme';
 
 export default function ProductCard({ product, onPress }) {
   return (
@@ -14,8 +15,8 @@ export default function ProductCard({ product, onPress }) {
 }
 
 const styles = StyleSheet.create({
-  card: { flexDirection: 'row', paddingVertical: 16, borderBottomWidth: 1, borderBottomColor: '#e4e7ec', gap: 12 },
-  image: { width: 88, height: 100 },
-  content: { flex: 1, justifyContent: 'center', gap: 6 },
-  title: { fontSize: 16, fontWeight: '600' },
+  card: { flexDirection: 'row', minHeight: 124, paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: colors.divider, gap: 4 },
+  image: { width: 100, height: 100, borderRadius: 8, backgroundColor: '#f3f4f5' },
+  content: { flex: 1, paddingTop: 14, paddingRight: 12, gap: 4 },
+  title: { fontFamily: fonts.medium, fontSize: 16, lineHeight: 21, minHeight: 42, color: colors.text },
 });
