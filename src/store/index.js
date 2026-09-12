@@ -1,8 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-// Os slices com regras de negócio serão adicionados nas próximas etapas.
-const initialState = {};
+import authReducer from './authSlice.js';
 
 export const store = configureStore({
-  reducer: (state = initialState) => state,
+  reducer: { auth: authReducer },
 });
